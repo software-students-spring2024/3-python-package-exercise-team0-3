@@ -88,11 +88,14 @@ def prompt_user():
   conciseness = get_conciseness()
   commenting = get_commenting()
   readability = get_readability()
+  # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
+  prompt = ""
   # RETURN PROMPT
-  return None
+  return prompt
 
 def callAPI():
-  # Example from OpenAI docs
+  # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
+  
   print('Calling GPT API...')
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
