@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pytest = "*"
 openai = "*"
+exceptiongroup = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -6,8 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "GPTCoder"
 description = "A package for generating code snippets using GPT-3.5-turbo, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
 version = "0.0.1"
+dependencies = ["openai", "python-dotenv"]
 authors = [
   { name="Eugene Chang", email="ec4338@nyu.edu" },
+  { name="Aarav Sawlani", email="as14324@nyu.edu"},
+  { name="Joshua Forlenza", email="jf4229@nyu.edu" },
+  { name="Nathanuel Dixon", email="nbd9400@nyu.edu"}
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
