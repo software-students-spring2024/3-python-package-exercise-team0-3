@@ -1,12 +1,4 @@
 from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-# Load the OpenAI API key from the environment variables
-load_dotenv(override=True)
-api_key = os.getenv("OPENAI_API_KEY")
-# Create an instance of the OpenAI client using the API key
-client = OpenAI(api_key=api_key)
 
 base_prompt = '''
 
@@ -36,22 +28,19 @@ The coding language: write the code in the language corresponding to the numbers
 
 Conciseness — Sliding scale. 1 = as concise as possible, 10 = laughably verbose
 Commenting — Sliding scale. 1 = no comments, 10 = comments on every line
-Readability / Formatting — 1 = barely readable, 10 = perfectly polished
-
-The 4 arguments you receive will be at the end of the users prompt. It will just be 4 numbers, each separated by a space. Thus, the prompt format will look something like this:
-
-english words, arg1 arg2 arg3 arg4
-'''
+Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
 
 # Programming language specifier
 def get_language():
   # prompt user for programming language
-  language = input("Enter the programming language of the code (press ENTER for default [python]): ")
-  
+  print("1. Python \n2. JavaScript \n3. Java \n4. C \n5. C++ \n6. C# \n7. TypeScript \n8. PHP \n9. Swift \n10. Ruby")
+  language = int(input("Enter the number corresponding to the programming language of the code (press ENTER for default [python]): "))
+  language_dict = {1: "Python", 2: "JavaScript" , 3: "Java" , 4: "C", 
+                   5: "C++", 6: "C#", 7: "TypeScript", 8: "PHP", 9: "Swift", 10: "Ruby"}
   if not language:
-    language = "python"
+    language = "Python"
   
-  return language
+  return language_dict[language]
 
 # Conciseness (as concise as possible, all the way to laughably "extra")
 def get_conciseness():
@@ -124,23 +113,21 @@ def prompt_user():
   commenting = get_commenting()
   readability = get_readability()
   # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
-  prompt = f"{code} Language: {language} Conciseness: {conciseness} Commenting: {commenting} Readability: {readability}"
+  prompt = ""
   # RETURN PROMPT
   return prompt
 
-def callAPI():
+def callAPI(api_key):
   # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
-  prompt = prompt_user()
+  client = OpenAI(api_key=api_key)
+  
   print('Calling GPT API...')
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
       {"role": "system", "content": base_prompt},
-      {"role": "user", "content": prompt}
+      {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
     ]
   )
   # RETURN COMPLETED RESPONSE FROM GPT
   return completion
-
-prompt_user()
-print(callAPI())
