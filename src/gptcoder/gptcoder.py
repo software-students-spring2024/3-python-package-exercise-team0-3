@@ -38,7 +38,7 @@ def get_language():
   language_dict = {1: "Python", 2: "JavaScript" , 3: "Java" , 4: "C", 
                    5: "C++", 6: "C#", 7: "TypeScript", 8: "PHP", 9: "Swift", 10: "Ruby"}
   if not language:
-    language = "Python"
+    language = 1
   
   return language_dict[language]
 
@@ -105,20 +105,20 @@ def get_readability():
   
   return readability
 
-# TODO: prompt user for what code they want to generate and the paramters
 def prompt_user():
   code = input("Enter the code you want GPT to generate: ")
   language = get_language()
   conciseness = get_conciseness()
   commenting = get_commenting()
   readability = get_readability()
-  # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
+  # insert scale values into prompt
   prompt = f"{code} Language: {language} Conciseness: {conciseness} Commenting: {commenting} Readability: {readability}"
-  # RETURN PROMPT
+  # return promopt
   return prompt
 
+# user must define their own API key
 def callAPI(api_key):
-  # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
+  
   client = OpenAI(api_key=api_key)
   prompt = prompt_user()
   print('Calling GPT API...')
@@ -129,5 +129,5 @@ def callAPI(api_key):
       {"role": "user", "conent": prompt}
     ]
   )
-  # RETURN COMPLETED RESPONSE FROM GPT
+  # return completed response from ChatGPT
   return completion
