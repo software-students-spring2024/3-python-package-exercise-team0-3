@@ -34,7 +34,7 @@ Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
 def get_language():
   # prompt user for programming language
   print("1. Python \n2. JavaScript \n3. Java \n4. C \n5. C++ \n6. C# \n7. TypeScript \n8. PHP \n9. Swift \n10. Ruby")
-  language = input("Enter the number corresponding to the programming language of the code (press ENTER for default [python]): ")
+  language = int(input("Enter the number corresponding to the programming language of the code (press ENTER for default [python]): "))
   language_dict = {1: "Python", 2: "JavaScript" , 3: "Java" , 4: "C", 
                    5: "C++", 6: "C#", 7: "TypeScript", 8: "PHP", 9: "Swift", 10: "Ruby"}
   if not language:
@@ -131,5 +131,3 @@ def callAPI(api_key):
   )
   # RETURN COMPLETED RESPONSE FROM GPT
   return completion
-
-print(get_language())
