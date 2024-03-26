@@ -1,6 +1,13 @@
 import pytest
 from gptcoder import gptcoder
 from unittest.mock import patch
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# Load the OpenAI API key from the environment variables
+api_key = os.getenv("OPENAI_API_KEY")
 
 # TODO: ADD UNIT TESTS
 class Tests:
@@ -125,7 +132,7 @@ class Tests:
     class Test_callAPI:
 
         def test_output(self):
-            output = gptcoder.callAPI("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")
+            output = gptcoder.callAPI(api_key)
             assert output.object=="chat.completion", f"Expected callAPI() to return a chat completion object. Instead, it returned {output}"
         
         # TODO: Add 2nd test testing if message is cod
