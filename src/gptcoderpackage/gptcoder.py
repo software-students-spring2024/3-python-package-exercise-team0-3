@@ -36,7 +36,12 @@ The coding language: write the code in the language corresponding to the numbers
 
 Conciseness — Sliding scale. 1 = as concise as possible, 10 = laughably verbose
 Commenting — Sliding scale. 1 = no comments, 10 = comments on every line
-Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
+Readability / Formatting — 1 = barely readable, 10 = perfectly polished
+
+The 4 arguments you receive will be at the end of the users prompt. It will just be 4 numbers, each separated by a space. Thus, the prompt format will look something like this:
+
+english words, arg1 arg2 arg3 arg4
+'''
 
 # Programming language specifier
 def get_language():
@@ -119,19 +124,19 @@ def prompt_user():
   commenting = get_commenting()
   readability = get_readability()
   # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
-  prompt = ""
+  prompt = f"{code} Language: {language} Conciseness: {conciseness} Commenting: {commenting} Readability: {readability}"
   # RETURN PROMPT
   return prompt
 
 def callAPI():
   # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
-  
+  prompt = prompt_user()
   print('Calling GPT API...')
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
       {"role": "system", "content": base_prompt},
-      {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+      {"role": "user", "content": prompt}
     ]
   )
   # RETURN COMPLETED RESPONSE FROM GPT
