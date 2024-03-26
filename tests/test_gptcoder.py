@@ -58,6 +58,30 @@ class Tests:
             with patch('builtins.input', return_value=input_value):
                 output = gptcoder.get_conciseness()
                 assert(1 <= output <= 10), f"Expected get_conciseness() to return an int between 10 and 100. Instead, it returned {output}"
+    
+    class Test_get_commenting:
+
+        @pytest.mark.parametrize("input_value", [(2)])
+        def test_output(self, input_value):
+            with patch('builtins.input', return_value=input_value):
+                output = gptcoder.get_commenting()
+                assert output is not None, "Expected get_commenting() to return output. Instead, it returned None"
+        
+        @pytest.mark.parametrize("input_value", [(2)])
+        def test_is_int(self, input_value):
+            with patch('builtins.input', return_value=input_value):
+                output = gptcoder.get_commenting()
+                assert isinstance(
+                output, int
+            ), f"Expected get_commenting() to return an int. Instead, it returned {output}"
+
+        @pytest.mark.parametrize("input_value", [(2)])
+        def test_is_in_range(self, input_value):
+            with patch('builtins.input', return_value=input_value):
+                output = gptcoder.get_commenting()
+                assert(1 <= output <= 10), f"Expected get_commenting() to return an int between 10 and 100. Instead, it returned {output}"
+
+        
         
         
         
