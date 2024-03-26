@@ -103,6 +103,34 @@ class Tests:
                 output = gptcoder.get_readability()
                 assert(1 <= output <= 10), f"Expected get_readability() to return an int between 10 and 100. Instead, it returned {output}"
 
+    class Test_prompt_user:
+
+        @pytest.mark.parametrize("input_value", [("2")])
+        def test_output(self, input_value):
+            # mocks user input
+            with patch('builtins.input', return_value=input_value):
+                output = gptcoder.prompt_user()
+                assert output is not None, "Expected prompt_user() to return output. Instead, it returned None"
+        
+        @pytest.mark.parametrize("input_value", [("2")])
+        def test_is_string(self, input_value):
+            with patch('builtins.input', return_value=input_value):
+                output = gptcoder.prompt_user()
+                assert isinstance(
+                output, str
+            ), f"Expected prompt_user() to return a string. Instead, it returned {output}"
+
+        # TODO: Add third test that tests if string is a prompt
+                
+    class Test_callAPI:
+
+        def test_output(self):
+            output = gptcoder.callAPI("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")
+            assert output.object=="chat.completion", f"Expected callAPI() to return a chat completion object. Instead, it returned {output}"
+        
+        # TODO: Add 2nd test testing if message is cod
+
+        # TODO: Add 3rd test that tests if languge is correct
         
         
         
