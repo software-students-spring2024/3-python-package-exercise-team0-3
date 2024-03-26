@@ -1,12 +1,4 @@
 from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-# Load the OpenAI API key from the environment variables
-load_dotenv(override=True)
-api_key = os.getenv("OPENAI_API_KEY")
-# Create an instance of the OpenAI client using the API key
-client = OpenAI(api_key=api_key)
 
 base_prompt = '''
 
@@ -123,8 +115,9 @@ def prompt_user():
   # RETURN PROMPT
   return prompt
 
-def callAPI():
+def callAPI(api_key):
   # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
+  client = OpenAI(api_key=api_key)
   
   print('Calling GPT API...')
   completion = client.chat.completions.create(
@@ -136,6 +129,3 @@ def callAPI():
   )
   # RETURN COMPLETED RESPONSE FROM GPT
   return completion
-
-prompt_user()
-print(callAPI())
