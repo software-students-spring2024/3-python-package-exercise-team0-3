@@ -1,5 +1,5 @@
 import pytest
-from gptcoderpackage import gptcoder
+from gptcoder import gptcoder
 
 # TODO: ADD UNIT TESTS
 class Tests:
