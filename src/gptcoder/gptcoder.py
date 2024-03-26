@@ -113,20 +113,20 @@ def prompt_user():
   commenting = get_commenting()
   readability = get_readability()
   # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
-  prompt = ""
+  prompt = f"{code} Language: {language} Conciseness: {conciseness} Commenting: {commenting} Readability: {readability}"
   # RETURN PROMPT
   return prompt
 
 def callAPI(api_key):
   # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
   client = OpenAI(api_key=api_key)
-  
+  prompt = prompt_user()
   print('Calling GPT API...')
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
       {"role": "system", "content": base_prompt},
-      {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+      {"role": "user", "conent": prompt}
     ]
   )
   # RETURN COMPLETED RESPONSE FROM GPT
