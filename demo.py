@@ -1,4 +1,4 @@
-from gptcoder import GPTCoder
+from src.gptcoder import GPTCoder
 from dotenv import load_dotenv
 import os
 

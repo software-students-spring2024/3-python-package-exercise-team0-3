@@ -31,6 +31,3 @@ dev = ["pytest"]
 "Homepage" = "https://github.com/software-students-spring2024/3-python-package-exercise-team0-3"
 "Repository" = "https://github.com/software-students-spring2024/3-python-package-exercise-team0-3.git"
 "Bug Tracker" = "https://github.com/software-students-spring2024/3-python-package-exercise-team0-3/issues"
-
-[project.scripts]
-gptcoder = "gptcoder.__main__:main"
