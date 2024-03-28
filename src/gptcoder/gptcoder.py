@@ -28,22 +28,19 @@ The coding language: write the code in the language corresponding to the numbers
 
 Conciseness — Sliding scale. 1 = as concise as possible, 10 = laughably verbose
 Commenting — Sliding scale. 1 = no comments, 10 = comments on every line
-Readability / Formatting — 1 = barely readable, 10 = perfectly polished
-
-The 4 arguments you receive will be at the end of the users prompt. It will just be 4 numbers, each separated by a space. Thus, the prompt format will look something like this:
-
-english words, arg1 arg2 arg3 arg4
-'''
+Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
 
 # Programming language specifier
 def get_language():
   # prompt user for programming language
-  language = input("Enter the programming language of the code (press ENTER for default [python]): ")
-  
+  print("1. Python \n2. JavaScript \n3. Java \n4. C \n5. C++ \n6. C# \n7. TypeScript \n8. PHP \n9. Swift \n10. Ruby")
+  language = int(input("Enter the number corresponding to the programming language of the code (press ENTER for default [python]): "))
+  language_dict = {1: "Python", 2: "JavaScript" , 3: "Java" , 4: "C", 
+                   5: "C++", 6: "C#", 7: "TypeScript", 8: "PHP", 9: "Swift", 10: "Ruby"}
   if not language:
-    language = "python"
+    language = 1
   
-  return language
+  return language_dict[language]
 
 # Conciseness (as concise as possible, all the way to laughably "extra")
 def get_conciseness():
@@ -108,30 +105,29 @@ def get_readability():
   
   return readability
 
-# TODO: prompt user for what code they want to generate and the paramters
 def prompt_user():
   code = input("Enter the code you want GPT to generate: ")
   language = get_language()
   conciseness = get_conciseness()
   commenting = get_commenting()
   readability = get_readability()
-  # INSERT THESE VALUES FROM FUNCTIONS INTO THE PROMPT
+  # insert scale values into prompt
   prompt = f"{code} Language: {language} Conciseness: {conciseness} Commenting: {commenting} Readability: {readability}"
-  # RETURN PROMPT
+  # return promopt
   return prompt
 
+# user must define their own API key
 def callAPI(api_key):
-  # Example from OpenAI docs, REPLACE WITH ACTUAL PROMPT
-  prompt = prompt_user()
-  client = OpenAI(api_key=api_key)
   
+  client = OpenAI(api_key=api_key)
+  prompt = prompt_user()
   print('Calling GPT API...')
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
       {"role": "system", "content": base_prompt},
-      {"role": "user", "content": prompt}
+      {"role": "user", "conent": prompt}
     ]
   )
-  # RETURN COMPLETED RESPONSE FROM GPT
+  # return completed response from ChatGPT
   return completion
