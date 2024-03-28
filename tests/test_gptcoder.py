@@ -1,146 +1,68 @@
 import pytest
-from gptcoder import gptcoder
-from unittest.mock import patch
-from dotenv import load_dotenv
-import os
+from unittest.mock import patch, MagicMock
+from src.gptcoder import GPTCoder
 
-load_dotenv()
+# Fixture for creating a GPTCoder instance with a mock API key
+@pytest.fixture
+def coder():
+    return GPTCoder("mock_api_key", 1, 1, 5, 10)
 
-# Load the OpenAI API key from the environment variables
-api_key = os.getenv("OPENAI_API_KEY")
-
-# TODO: ADD UNIT TESTS
 class Tests:
-    
-    @pytest.fixture
-    def fixture(self):
-        pass
 
-    def test_sanity_check(self, fixture):
-        pass
+    api_key = "mock_api_key"
 
-    class Test_get_language:
+    @staticmethod
+    def test_sanity_check():
+        expected = True
+        actual = True
+        assert actual == expected
 
-        @pytest.mark.parametrize("input_value", [("2")])
-        def test_output(self, input_value):
-            # mocks user input
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_language()
-                assert output is not None, "Expected get_language() to return output. Instead, it returned None"
-        
-        @pytest.mark.parametrize("input_value", [("2")])
-        def test_is_string(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_language()
-                assert isinstance(
-                output, str
-            ), f"Expected get_language() to return a string. Instead, it returned {output}"
+    # Test to ensure the GPTCoder instance is initialized correctly
+    def test_init(self, coder):
+        assert coder.api_key == "mock_api_key"
+        assert coder.language == "Python"  # Default language
+        assert coder.conciseness == 1
+        assert coder.commenting == 5
+        assert coder.readability == 10
 
-        @pytest.mark.parametrize("input_value", [("2")])
-        def test_is_language(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                language_dict = ["Python", "JavaScript", "Java", "C", 
-                   "C++", "C#", "TypeScript", "PHP", "Swift", "Ruby"]
-                output = gptcoder.get_language()
-                assert output in language_dict, f"Expected get_language() to return a programming language. Instead, it returned {output}"
-    
-    class Test_get_conciseness:
+    # Test the static method get_language_name for various language codes
+    @pytest.mark.parametrize("language_code, expected_language", [
+        (1, "Python"),
+        (5, "C++"),
+        (10, "Ruby"),
+        (99, "Python")  # Default case
+    ])
+    def test_get_language_name(self, language_code, expected_language):
+        assert GPTCoder.get_language_name(language_code) == expected_language
 
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_output(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_conciseness()
-                assert output is not None, "Expected get_conciseness() to return output. Instead, it returned None"
-        
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_int(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_conciseness()
-                assert isinstance(
-                output, int
-            ), f"Expected get_conciseness() to return an int. Instead, it returned {output}"
+    def test_initialization_with_mock_api_key(self):
+        coder = GPTCoder(api_key='mock_api_key')
+        assert coder.api_key == 'mock_api_key', "API key should be correctly stored"
 
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_in_range(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_conciseness()
-                assert(1 <= output <= 10), f"Expected get_conciseness() to return an int between 10 and 100. Instead, it returned {output}"
-    
-    class Test_get_commenting:
+    # Test the behavior of setting the language
+    @pytest.mark.parametrize("language_code, expected_language", [
+        (1, "Python"),
+        (2, "JavaScript"),
+        (10, "Ruby"),
+    ])
+    def test_set_language(self, coder, language_code, expected_language):
+        coder.set_language(language_code)
+        assert coder.language == expected_language
 
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_output(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_commenting()
-                assert output is not None, "Expected get_commenting() to return output. Instead, it returned None"
-        
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_int(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_commenting()
-                assert isinstance(
-                output, int
-            ), f"Expected get_commenting() to return an int. Instead, it returned {output}"
+    # Test setting conciseness
+    @pytest.mark.parametrize("conciseness", [1, 5, 10])
+    def test_set_conciseness(self, coder, conciseness):
+        coder.set_conciseness(conciseness)
+        assert coder.conciseness == conciseness, f"Expected conciseness to be set to {conciseness}"
 
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_in_range(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_commenting()
-                assert(1 <= output <= 10), f"Expected get_commenting() to return an int between 10 and 100. Instead, it returned {output}"
+    # Test setting commenting
+    @pytest.mark.parametrize("commenting", [1, 5, 10])
+    def test_set_commenting(self, coder, commenting):
+        coder.set_commenting(commenting)
+        assert coder.commenting == commenting, f"Expected commenting to be set to {commenting}"
 
-    class Test_get_readability:
-
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_output(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_readability()
-                assert output is not None, "Expected get_readability() to return output. Instead, it returned None"
-        
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_int(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_readability()
-                assert isinstance(
-                output, int
-            ), f"Expected get_readability() to return an int. Instead, it returned {output}"
-
-        @pytest.mark.parametrize("input_value", [(2)])
-        def test_is_in_range(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.get_readability()
-                assert(1 <= output <= 10), f"Expected get_readability() to return an int between 10 and 100. Instead, it returned {output}"
-
-    class Test_prompt_user:
-
-        @pytest.mark.parametrize("input_value", [("2")])
-        def test_output(self, input_value):
-            # mocks user input
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.prompt_user()
-                assert output is not None, "Expected prompt_user() to return output. Instead, it returned None"
-        
-        @pytest.mark.parametrize("input_value", [("2")])
-        def test_is_string(self, input_value):
-            with patch('builtins.input', return_value=input_value):
-                output = gptcoder.prompt_user()
-                assert isinstance(
-                output, str
-            ), f"Expected prompt_user() to return a string. Instead, it returned {output}"
-
-        # TODO: Add third test that tests if string is a prompt
-                
-    class Test_callAPI:
-
-        def test_output(self):
-            output = gptcoder.callAPI(api_key)
-            assert output.object=="chat.completion", f"Expected callAPI() to return a chat completion object. Instead, it returned {output}"
-        
-        # TODO: Add 2nd test testing if message is cod
-
-        # TODO: Add 3rd test that tests if languge is correct
-        
-        
-        
-        
-
-
+    # Test setting readability
+    @pytest.mark.parametrize("readability", [1, 5, 10])
+    def test_set_readability(self, coder, readability):
+        coder.set_readability(readability)
+        assert coder.readability == readability, f"Expected readability to be set to {readability}"
