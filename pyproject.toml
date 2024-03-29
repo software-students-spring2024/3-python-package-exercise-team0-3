@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gptcoder"
 description = "A package for generating code snippets using GPT-3.5-turbo, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
-version = "0.1.0"
+version = "0.1.1"
 dependencies = ["openai"]
 authors = [
   { name="Eugene Chang", email="ec4338@nyu.edu" },
