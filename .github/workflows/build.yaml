@@ -33,15 +33,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pipenv
+          pip install pipenv twine
           pipenv install python-dotenv openai
       - name: Build package
         run: |
           pipenv install build
           pipenv run python -m build .
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }} # Updated to use a more generic secret name
-          repository_url: https://upload.pypi.org/legacy/ # Changed to the real PyPI for publishing
-
+      - name: Publish to PyPI with Twine
+        run: |
+          pipenv run twine upload dist/* --verbose --repository-url https://upload.pypi.org/legacy/ --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
