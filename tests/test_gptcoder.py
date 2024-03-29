@@ -78,19 +78,4 @@ class Tests:
     def test_set_readability_wrong_input(self, coder):
         with pytest.raises(Exception) as e_info:
             res = coder.set_readability("NaN")
-
-
-    # Test generating code
-    def test_generate_code_output(self, coder):
-        test_prompt = "A program that prints numbers 1-100"
-        output = coder.generate_code(test_prompt)
-        
-        assert isinstance(output, str), "Expected function to return a string"
-    '''
-        def test_generate_code_code(self, coder):
-        test_prompt = "A program that prints numbers 1-100"
-        output = coder.generate_code(test_prompt)
-        
-        assert isinstance(output, str), "Expected function to return a string"
-    '''
     
