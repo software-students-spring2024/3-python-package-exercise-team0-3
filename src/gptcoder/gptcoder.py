@@ -28,7 +28,10 @@ The coding language: write the code in the language corresponding to the numbers
 
 Conciseness — Sliding scale. 1 = as concise as possible, 10 = laughably verbose
 Commenting — Sliding scale. 1 = no comments, 10 = comments on every line
-Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
+Readability / Formatting — 1 = barely readable, 10 = perfectly polished
+
+Please note within the first line of the output the type of language of the code
+'''
 
 class GPTCoder:
   
