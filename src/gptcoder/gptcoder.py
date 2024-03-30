@@ -28,7 +28,10 @@ The coding language: write the code in the language corresponding to the numbers
 
 Conciseness — Sliding scale. 1 = as concise as possible, 10 = laughably verbose
 Commenting — Sliding scale. 1 = no comments, 10 = comments on every line
-Readability / Formatting — 1 = barely readable, 10 = perfectly polished'''
+Readability / Formatting — 1 = barely readable, 10 = perfectly polished
+
+Please note within the first line of the output the type of language of the code
+'''
 
 class GPTCoder:
   
@@ -50,18 +53,28 @@ class GPTCoder:
       return language_dict.get(language_code, "Python")
         
   def set_language(self, language_code):
-    # print("1. Python \n2. JavaScript \n3. Java \n4. C \n5. C++ \n6. C# \n7. TypeScript \n8. PHP \n9. Swift \n10. Ruby")
-    # language = int(input("Enter the number corresponding to the programming language of the code (press ENTER for default [python]): "))
-    self.language = self.get_language_name(language_code)
+    if isinstance(language_code, int):
+      self.language = self.get_language_name(language_code)
+    else:
+      raise ValueError("ERROR: Argument must be an integer")
 
   def set_conciseness(self, conciseness):
-    self.conciseness = conciseness
+    if isinstance(conciseness, int):
+      self.conciseness = conciseness
+    else:
+      raise ValueError("ERROR: Argument must be an integer")
 
   def set_commenting(self, commenting):
-    self.commenting = commenting
+    if isinstance(commenting, int):
+      self.commenting = commenting
+    else:
+      raise ValueError("ERROR: Argument must be an integer")
 
   def set_readability(self, readability):
-    self.readability = readability
+    if isinstance(readability, int):
+      self.readability = readability
+    else:
+      raise ValueError("ERROR: Argument must be an integer")
 
   def generate_code(self, code_prompt):
 

@@ -48,21 +48,34 @@ class Tests:
     def test_set_language(self, coder, language_code, expected_language):
         coder.set_language(language_code)
         assert coder.language == expected_language
+    def test_set_language_wrong_input(self, coder):
+        with pytest.raises(Exception) as e_info:
+            coder.set_conciseness("NaN")
 
     # Test setting conciseness
     @pytest.mark.parametrize("conciseness", [1, 5, 10])
     def test_set_conciseness(self, coder, conciseness):
         coder.set_conciseness(conciseness)
         assert coder.conciseness == conciseness, f"Expected conciseness to be set to {conciseness}"
+    def test_set_conciseness_wrong_input(self, coder):
+        with pytest.raises(Exception) as e_info:
+            coder.set_conciseness("NaN")
 
     # Test setting commenting
     @pytest.mark.parametrize("commenting", [1, 5, 10])
     def test_set_commenting(self, coder, commenting):
         coder.set_commenting(commenting)
         assert coder.commenting == commenting, f"Expected commenting to be set to {commenting}"
+    def test_set_commenting_wrong_input(self, coder):
+        with pytest.raises(Exception) as e_info:
+            coder.set_commenting("NaN")
 
     # Test setting readability
     @pytest.mark.parametrize("readability", [1, 5, 10])
     def test_set_readability(self, coder, readability):
         coder.set_readability(readability)
         assert coder.readability == readability, f"Expected readability to be set to {readability}"
+    def test_set_readability_wrong_input(self, coder):
+        with pytest.raises(Exception) as e_info:
+            res = coder.set_readability("NaN")
+    
