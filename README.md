@@ -78,15 +78,21 @@ To contribute to this project, follow these steps:
 
     Our project's dependencies are listed in the Pipfile. You can install them with pipenv:
     ```bash
-    pipenv install
+    pipenv install gptcoder
     ```
 
 3. Build the package:
 
     The package can be built using the pyproject.toml file, which contains the build system (poetry) and the project metadata. To build the package, run:
     ```bash
-    poetry build
+    python3 -m build
     ```
+
+## How to run unit tests
+Simple example unit tests are included within the ```tests``` directory. To run the tests:
+1. Install pytest in a virtual environment.
+2. Run the tests from the main project directory: ```python3 -m pytest```.
+3. Tests should never fail.
 
 ## Demo
 <!-- add link to Demo program, blue underlined link to demo.py -->
