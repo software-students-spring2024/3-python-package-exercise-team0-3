@@ -65,7 +65,14 @@ from gptcoder import GPTCoder
         - Values: Any string
         - Default: None
 
+<!-- add link to Demo program, blue underlined link to demo.py -->
+[Demo Program](demo.py)
+
 ## Team Members
+- [Nathanuel Dixon] (https://github.com/nathanuel0322)
+- [Aarav Sawlani] (https://github.com/aaravsawlani)
+- [Josh Forlenza] (https://github.com/joshforlenza)
+- [Eugene Chang] (https://github.com/egnechng)
 
 ## Package Page
-- link to Package in PyPi
+[gptcoder on PyPi](https://pypi.org/project/gptcoder/)
