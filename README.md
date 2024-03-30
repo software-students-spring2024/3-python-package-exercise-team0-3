@@ -64,15 +64,39 @@ from gptcoder import GPTCoder
         - Description: The prompt for the code to be generated.
         - Values: Any string
         - Default: None
+<!-- Include how a developer who wants to contribute to your project can set up the virtual environment, install dependencies, and build and test your package for themselves. -->
+## Contributing
+To contribute to this project, follow these steps:
+1. Set up the virtual environment
+    ```bash
+    pip install pipenv
+    cd path/to/project
+    pipenv shell
+    ```
 
+1. Install dependencies:
+
+    Our project's dependencies are listed in the Pipfile. You can install them with pipenv:
+    ```bash
+    pipenv install
+    ```
+
+3. Build the package:
+
+    The package can be built using the pyproject.toml file, which contains the build system (poetry) and the project metadata. To build the package, run:
+    ```bash
+    poetry build
+    ```
+
+## Demo
 <!-- add link to Demo program, blue underlined link to demo.py -->
 [Demo Program](demo.py)
 
 ## Team Members
-- [Nathanuel Dixon] (https://github.com/nathanuel0322)
-- [Aarav Sawlani] (https://github.com/aaravsawlani)
-- [Josh Forlenza] (https://github.com/joshforlenza)
-- [Eugene Chang] (https://github.com/egnechng)
+- [Nathanuel Dixon](https://github.com/nathanuel0322)
+- [Aarav Sawlani](https://github.com/aaravsawlani)
+- [Josh Forlenza](https://github.com/joshforlenza)
+- [Eugene Chang](https://github.com/egnechng)
 
 ## Package Page
 [gptcoder on PyPi](https://pypi.org/project/gptcoder/)
